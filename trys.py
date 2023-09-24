@@ -32,7 +32,9 @@ author = quote_data["author"]
 email = input("Enter your email address: ")
 
 # Use an App Password for Gmail authentication
-# (Your Gmail credentials remain unchanged)
+gmail_user = "embroconnect3@gmail.com"  # Your Gmail email address
+gmail_app_password = "pqgrusbzotsutwny" 
+# Replace with your App Password
 
 message = MIMEMultipart()
 message['From'] = gmail_user
