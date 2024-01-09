@@ -3,6 +3,7 @@ import pandas as pd
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
+from reportlab.lib.utils import ImageReader
 
 def convert_lowercase_to_uppercase(input_string):
     result = ''
@@ -14,19 +15,31 @@ def convert_lowercase_to_uppercase(input_string):
         result += char
     return result
 
-df = os.path.join(os.path.expanduser("~"),"Downloads","class_list.xlsx")
-df_students = pd.read_excel(df)
 
-df2 = os.path.join(os.path.expanduser("~"), "Downloads", "subject_list.xlsx")
-df_course_info = pd.read_excel(df2)
+def find_scripts():
+    
+    global df_students, df_course_info, df2
+    # Load the Excel files
+    df = os.path.join(os.path.expanduser("~"), "Downloads", "class_list.xlsx")
+    df_students = pd.read_excel(df)
+
+    df2 = os.path.join(os.path.expanduser("~"), "Downloads", "subject_list.xlsx")
+    df_course_info = pd.read_excel(df2)
+    return df_students, df_course_info, df2
+
+# Call the function to load the data and update global variables
+df_students, df_course_info, df2 = find_scripts()
+
+subject_codes = input("Enter subject code: ")  # Replace this with the user input
+subject_code = convert_lowercase_to_uppercase(subject_codes)
 
 
 # Step 1: Read the first Excel file with student data
-def print_subject_list():
+def print_subject_list(subject_code):
+    subject_code = convert_lowercase_to_uppercase(subject_codes)
    
     # Step 2: Extract the subject code provided by the user
-    subject_codes = input("Enter subject code: ")  # Replace this with the user input
-    subject_code = convert_lowercase_to_uppercase(subject_codes)
+    
 
     # Extract relevant columns
    # Filter students who have 'TRUE' for the provided subject code
@@ -41,7 +54,7 @@ def print_subject_list():
     df_filtered = df_filtereds.copy()  # Make a copy to avoid modifying the original DataFrame
     df_filtered.insert(0, 'Numbering', range(1, len(df_filtered) + 1))
 
-# Display the modified DataFrame
+    # Display the modified DataFrame
 
 
 
@@ -71,8 +84,8 @@ def print_subject_list():
     c.setFillColor(colors.black)
 
     # Draw the heading with line breaks
-    heading_textobject = c.beginText(100, 750)
-    heading_textobject.setFont("Helvetica-Bold", 12)
+    heading_textobject = c.beginText(130, 750)
+    heading_textobject.setFont("Times-Bold", 12)
     heading_textobject.setFillColor(colors.black)
     heading_textobject.textLines(heading)
     c.drawText(heading_textobject)
@@ -82,18 +95,39 @@ def print_subject_list():
     even_color = colors.white
 
     font_size = 9
+    
+   
 
     # Add table headers with different colors
     header_y = 700
-    c.setFillColor(colors.green)
-    c.drawString(98, header_y, "NO")
-    c.drawString(150, header_y, "Full Name")
-    c.drawString(350, header_y, "Matric No")
-    c.drawString(500, header_y, "Signature")
+    c.setFillColor(colors.green)  # Set fill color for the top row
+    c.setStrokeColor(colors.black)  # Set the border color
+    c.setLineWidth(1)  # Set the border line width
+    c.setFont("Times-Bold", 11)  # Set bold font for headers
+    
+    image_path = os.path.join(os.path.expanduser('~'), "Downloads", "pic.png")  # Replace with the path to your logo
+    logo = ImageReader(image_path)
+    
+    # Draw the image at the top-left corner
+    c.drawImage(logo, 55, header_y + 15, width=70, height=50)
+    # Adjust width and height as needed
+
+
+    # Draw green rectangle for the top row
+    c.rect(60, header_y - 15, 500, 20, fill=True)
+
+    # Set text color to white for the top row
+    c.setFillColor(colors.white)
+    c.drawString(70, header_y - 10, "NO")
+    c.drawString(98, header_y - 10, "Full Name")
+    c.drawString(350, header_y - 10, "Matric No")
+    c.drawString(500, header_y - 10, "Signature")
+   
+    
 
     # Add extracted data to the PDF
     y_coordinate = 680  # Start after header
-    line_height = 20  # Height between each row
+    line_height = 20
     row_count = 0
 
     for index, row in df_filtered.iterrows():
@@ -114,19 +148,22 @@ def print_subject_list():
             c.setFillColor(even_color)
         
         # Draw rectangles for row background
-        c.rect(90, y_coordinate - 15, 500, line_height, fill=True)
-        
+       
+        c.rect(60, y_coordinate - 15, 500, line_height, fill=True)
         # Place Full Name, Matric No, and Signature on separate rows with colors and adjusted font size
         c.setFillColor(colors.black)
-        c.setFont("Helvetica", font_size)
-        c.drawString(100, y_coordinate - 10, numbering)
-        c.drawString(150, y_coordinate - 10, full_name)
+        c.setFont("Times-Roman", font_size)
+        c.drawString(70, y_coordinate - 10, numbering)
+        c.drawString(98, y_coordinate - 10, full_name)
         c.drawString(350, y_coordinate - 10, matric_no)
         c.drawString(500, y_coordinate - 10, signature)
-        
+       
+
         # Move to the next row
+       
         y_coordinate -= line_height
         row_count += 1
+
 
     if os.path.exists(pdf_filename):
         os.remove(pdf_filename)
@@ -134,20 +171,6 @@ def print_subject_list():
     # Save and close the PDF
     c.save()
     print(f"Class list for subject {subject_code} created and saved to {pdf_filename}")
+    return pdf_filename
 
-def list_subject_code():
-    # Read the second Excel sheet
-    df_course_info = pd.read_excel(df2)
-
-    # Extract the 'Subject Code' column
-    subject_codes = df_course_info['SUBJECT CODE']
-
-    # Display or use the extracted subject codes
-    print(subject_codes)
-
-try:
-    print_subject_list()
-except Exception as e:
-    print (f"invalid Subject Code {e}")
-    print("these are the subject code:")
-    list_subject_code()
+print_subject_list(subject_code)

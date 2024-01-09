@@ -85,11 +85,20 @@ def print_subject_list():
 
     # Add table headers with different colors
     header_y = 700
-    c.setFillColor(colors.green)
-    c.drawString(98, header_y, "NO")
-    c.drawString(150, header_y, "Full Name")
-    c.drawString(350, header_y, "Matric No")
-    c.drawString(500, header_y, "Signature")
+    c.setFillColor(colors.green)  # Set fill color for the top row
+    c.setStrokeColor(colors.black)  # Set the border color
+    c.setLineWidth(1)  # Set the border line width
+    c.setFont("Helvetica-Bold", font_size)  # Set bold font for headers
+
+    # Draw green rectangle for the top row
+    c.rect(90, header_y - 15, 500, 20, fill=True)
+
+    # Set text color to white for the top row
+    c.setFillColor(colors.white)
+    c.drawString(100, header_y - 10, "NO")
+    c.drawString(150, header_y - 10, "Full Name")
+    c.drawString(350, header_y - 10, "Matric No")
+    c.drawString(500, header_y - 10, "Signature")
 
     # Add extracted data to the PDF
     y_coordinate = 680  # Start after header

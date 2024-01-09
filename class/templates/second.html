@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #000; /* Black background for the grid */
+        background-size: 40px 40px; /* Size of individual squares */
+        background-image: 
+            linear-gradient(to right, rgba(1, 254, 102, 0.863) 2px, transparent 2px),
+            linear-gradient(to bottom, rgba(1, 254, 102, 0.863) 2px, transparent 2px);
+        transition: background-color 0.3s; /* Transition for the hover effect */
+        }
+        body:hover {
+        background-image: 
+            linear-gradient(90deg, rgba(1, 254, 102, 0.863) 1px, transparent 1px),
+            linear-gradient(rgba(1, 254, 102, 0.863) 1px, transparent 1px);
+        }
+        h2 {
+        color: rgb(1, 254, 1);
+        text-align: center;
+        margin-top: 10px;
+        }
+        .form {
+        background-color: rgb(26, 26, 26); /* White background for the signin box */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        color: white;
+        width: 300px; /* Adjust width as needed */
+        height: 200px;
+        align-items: center; /* Align items (input boxes) to the center horizontally */
+        justify-content: center;
+        }
+        .inputBox {
+        position: relative;
+        margin-bottom: 20px; /* Adjust spacing */
+        }
+    
+        input[type="submit"] {
+            padding: 10px;
+             border: none;
+            border-radius: 12px;
+            width: 120px;
+            height: 50px; /* Added 'px' unit for width */
+            background-color: #2ecc71; /* Green for login button */
+            olor: #000; /* Adjusted text color for visibility */
+            display: flex; /* Set display to flex for alignment properties to work */
+            align-items: center; /* Align items vertically */
+            justify-content: center; /* Align items horizontally */
+            cursor: pointer;
+            margin-top: 30px; /* Moves the button down by 20px */
+            margin-left: auto; /* Aligns the button to the center horizontally */
+            margin-right: auto; 
+        }
+    
+        .inputBox:hover input[type="submit"],
+        .links a:hover {
+            background-color: #000000; /* Green color for hover */
+            color: white;
+            margin-bottom: 8px; /* Adjust spacing */
+            text-align: center;
+            display: block;
+        }
+        label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            color: #ffffff;
+            text-align: middle;
+            pointer-events: none;
+            transition: top 0.3s, font-size 0.3s, color 0.3s, font-weight 0.3s;
+            font-weight: bold;
+            opacity: 1; /* Ensure label is initially visible */
+        }
+    
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            background-color: #272626;
+            width: 290px;
+        
+        }
+    
+        .inputBox {
+            position: relative;
+            margin-bottom: 20px; /* Adjust spacing */
+        }
+    
+    
+    
+        input[type="text"]:focus ~ label {
+            top: 5px;
+            font-size: 12px;
+            color: #2ecc71;
+            font-weight: normal;
+            opacity: 0; /* Hide label when input is focused or contains valid input */
+        }
+    
+    </style>
+    
+
+
+    <title>Student Data to PDF</title>
+</head>
+<body>
+    <div class="form">
+        <h2>Download Subject List</h2>
+        <form id="dataForm" action="/generate_pdf" method="POST">
+        <!-- Create input field for subject code -->
+        
+        <div class="inputBox">
+            <input class="subject_code" type="text" id="subjectCode" name="subject_code">
+            <label for="subjectCode">Subject Code:</label>
+        </div>
+        
+        <div class="inputBox">
+            <input class = "button" type="submit" value="Generate PDF">
+        </form>
+        </div>
+        
+    </div>
+    
+    
+    
+
+    <script>
+        // Handle form submission using JavaScript
+        var passwordField = document.getElementById('subjectCode');
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Make a POST request to the Flask endpoint
+            fetch('/generate_pdf', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the response is OK, trigger the file download
+                    passwordField.value = ''; // Reset password field
+                    return response.blob();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(blob => {
+                // Create a URL for the generated PDF blob
+                const url = window.URL.createObjectURL(blob);
+                // Trigger the file download
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'generated_pdf.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
