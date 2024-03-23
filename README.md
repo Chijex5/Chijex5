@@ -1,5 +1,7 @@
 - 👋 Hi, I am Chijioke
-- 👀 I am a data analyst
+- I Live in Lagos
+- 👀 I am a data analyst/Data engineer
+- 
 
 <!---
 Chijex5/Chijex5 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
