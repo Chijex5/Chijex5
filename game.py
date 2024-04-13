@@ -67,6 +67,7 @@ while True:
         print_board(board)
         print("The game is a draw!")
         break
+    
 
     # Switch to the next player
     current_player = get_next_player(current_player)
