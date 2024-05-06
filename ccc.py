@@ -16,6 +16,8 @@ import tkinter as tk
 import random
 
 class TicTacToeGUI:
+    def player_name(self):
+        tk.messagebox.showinfo("Current Player", f"It is {self.current_player} turn")
     def __init__(self, root):
         self.root = root
         self.root.title("Tic-Tac-Toe")
@@ -28,6 +30,7 @@ class TicTacToeGUI:
                                      [(0, 0), (1, 1), (2, 2)], [(0, 2), (1, 1), (2, 0)]]
         self.player_score = {'X': 0, 'O': 0}
         self.update_score_display()
+        self.player_name()
 
     def create_widgets(self):
         # Create the game board frame
@@ -88,6 +91,7 @@ class TicTacToeGUI:
             for j in range(3):
                 self.buttons[i][j].config(text="")
         self.update_score_display()
+        self.player_name()
 
     def display_winner(self):
         winner = "Player O" if self.current_player == 'O' else "Player X"

@@ -21,8 +21,8 @@ def run_at_specific_time(hour, minute):
             time.sleep(60)  # Sleep for 60 seconds (1 minute) before checking again
 
 # Specify the desired time (11:30)
-desired_hour = 10
-desired_minute = 24
+desired_hour = 12
+desired_minute = 27
 
 # Run the function
 run_at_specific_time(desired_hour, desired_minute)

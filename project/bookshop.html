@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>library webpage</title> 
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/boxicons/2.1.4/css/boxicons.min.css">
+
+</head>
+<body>
+ 
+    <!-- Dynamic educational elements will be generated here -->
+  </div>
+  <section class="homepage" style="display: flex;">
+    <div class="homepage-content">
+      <h1 class="text1">Your <span class="green-text">one-stop</span> Destination for all your academic needs!</h1>
+      <p class="small-text">Browse our extensive collection of textbooks, study materials, workbooks, and place your order conveniently online.</p>
+    </div>
+  </section>
+
+  <section class="homepage2" style="display: contents;">
+    <footer class="footer-bar">
+      <div class="footer-content">
+        <p>Satisfied users <span id="satisfiedCount">0</span> Trusted by <span id="trustedCount">0</span>      Active hrs/day <span id="activeHoursCount">0</span>Hrs</p>
+      </div>
+    </footer>
+    <div class="welcome-message">
+      <h2 style="color: #333; font-size: 24px; font-weight: bold;">Welcome back!</h2>
+      <p style="font-size: 18px; color: #666; margin-bottom: 20px;">Sign in to explore a world of limitless possibilities.</p>
+      <!-- Styled Sign in button -->
+      <button class="register-link1">Sign in</button>
+      <!-- Or styled anchor tag for Sign in -->
+      <!-- <a href="#login1" class="sign-in-button">Sign in</a> -->
+      <p style="font-size: 16px; color: #888;">Don't have an account? <button class="register-link">Sign Up</button> </p>
+    </div>
+  </section>
+
+  <section id="login1" class="login" style="display:none;">
+    <form id="loginForm">
+      <h1>Login</h1>
+      <div>
+        <label>Username</label>
+        <input type="text" id="username">
+      </div>
+      <div class="password-container">
+        <label for="password">Password</label>
+        <div class="input-with-icon">
+          <input type="password" id="password" name="password" style="padding-right: 40px;"> <!-- Add padding to accommodate the icon -->
+          <!-- Eye icon for password visibility -->
+          <i class="bx bx-show" id="toggle-password" style="position: absolute; right: 917px; top: 46%; transform: translateY(-50%); cursor: pointer; color:Black; font-size: 24px;"></i> <!-- Adjust position, size, and color of the icon -->
+        </div>
+      </div>
+      <button type="submit">Login</button>
+      <p><a href="#forgot" class="register-link2"> Forgot Password</a>
+    </form>
+  </section>
+
+  <section id="register" class="register" style="display: none;">
+    <form id="registerForm">
+      <h1>Register</h1>
+      <!-- Step 1: Personal Information -->
+      <div class="step" id="step1" style="display: none;">
+        <div class="group">
+          <label for="regno">Registration Number</label>
+          <input type="text" id="regno" required>
+        </div>
+        <div class="group">
+          <label for="password">Password</label>
+          <div class="input-with-icon">
+            <input type="password" id="password1" name="password" style="padding-right: 40px;"> <!-- Add padding to accommodate the icon -->
+            <!-- Eye icon for password visibility -->
+            <i class="bx bx-show" id="toggle-password1" style="position: absolute; right: 840px; top: 46%; transform: translateY(-50%); cursor: pointer; color:Black; font-size: 24px;"></i> <!-- Adjust position, size, and color of the icon -->
+          </div>
+        </div>
+        <button id="steb1" class="next-step" data-step="step2">Next</button>
+      </div>
+  
+      <!-- Step 2: Contact Information -->
+        
+      <div class="step" id="step2" style="display: none;">
+        <div class="group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" required>
+        </div>
+        <div class="group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone">
+        </div>
+        <button id="prev2" class="prev-step" data-step="step1">Back</button>
+        <button id="steb2" class="next-step" data-step="step3">Next</button>
+      </div>
+  
+      <!-- Step 3: Additional Information -->
+      <div class="step" id="step3" style="display: none;">
+        <div class="group">
+          <label for="department">Department</label>
+          <input type="text" id="department">
+        </div>
+        <div class="group">
+          <label for="address">Address</label>
+          <input type="text" id="address">
+        </div>
+        <button id="prev3" class="prev-step" data-step="step2">Back</button>
+        <button type="submit" id="reg1">Register</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="forgot" class="forgot" style="display: none;">
+    <form id="forgot-form">
+      <h1>Reset Password</h1>
+    <div class="group">
+      <label for="regno">Registration Number</label>
+      <input type="text" id="regno3" required>
+    </div>
+    <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <div id="message-container" class="message-container"></div>
+    
+  <script src="script.js"></script>
+</body>

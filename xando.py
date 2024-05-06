@@ -7,7 +7,8 @@ class TicTacToeGUI:
         self.root = root
         self.root.title("Tic-Tac-Toe")
         self.difficulty_level = None
-        self.current_player = None
+        self.current_player = 'X'
+        self.symbols = {'X': 'X', 'O': 'O'}
         self.board = [[' ' for _ in range(3)] for _ in range(3)]
         self.create_widgets()
         self.create_board_buttons()
@@ -16,6 +17,24 @@ class TicTacToeGUI:
                                      [(0, 0), (1, 1), (2, 2)], [(0, 2), (1, 1), (2, 0)]]
         self.player_score = {'X': 0, 'O': 0}
         self.update_score_display()
+        
+    def make_move(self, row, col):
+        # Before making a move, push the current state onto the stack
+        self.previous_states.append([row[:] for row in self.board])
+
+        # Make the move as usual
+        # Update the game board, check for win/draw, etc.
+
+    def undo_move(self):
+        if self.previous_states:
+            # Restore the previous state from the stack
+            self.board = self.previous_states.pop()
+            # Update the GUI to reflect the restored state
+
+    def create_undo_button(self):
+        undo_button = tk.Button(self.buttons_frame, text="Undo", command=self.undo_move)
+        undo_button.pack()
+        
     def minimax(self, is_maximizing, alpha, beta):
         if self.check_win('O'):
             return 1
@@ -71,7 +90,11 @@ class TicTacToeGUI:
         # Create the buttons frame
         self.buttons_frame = tk.Frame(self.root)
         self.buttons_frame.pack()
-
+        
+        # Create the settings button
+        self.settings_button = tk.Button(self.buttons_frame, text="Settings", command=self.open_settings)
+        self.settings_button.pack()
+        
         # Create the reset button
         self.reset_button = tk.Button(self.buttons_frame, text="Reset", command=self.reset_game)
         self.reset_button.pack()
@@ -97,8 +120,8 @@ class TicTacToeGUI:
                 self.buttons[i][j].grid(row=i, column=j)
 
     def update_score_display(self):
-        self.score_label.config(text=f"Score: X - {self.player_score['X']}  O - {self.player_score['O']}")
-
+        self.score_label.config(text=f"Score: {self.symbols['X']} - {self.player_score['X']}  {self.symbols['O']} - {self.player_score['O']}")
+        
     def on_button_click(self, row, col):
         if self.current_player == 'X' and self.board[row][col] == ' ':
             self.board[row][col] = 'X'
@@ -135,10 +158,12 @@ class TicTacToeGUI:
 
     def display_winner(self, player):
         messagebox.showinfo("Winner!", f"Player {player} wins!")
-
+        self.reset_game()
+        
     def display_draw(self):
         messagebox.showinfo("Draw!", "The game is a draw!")
-
+        self.reset_game()
+        
     def make_ai_move(self):
        if self.difficulty_level == "Easy":
            empty_cells = [(row, col) for row in range(3) for col in range(3) if self.board[row][col] == ' ']
@@ -183,10 +208,38 @@ class TicTacToeGUI:
                    self.display_draw()
                else:
                    self.current_player = 'X'
+                   
+    def open_settings(self):
+        settings_window = tk.Toplevel(self.root)
+        settings_window.title("Settings")
 
+        # Symbols selection
+        symbols_frame = tk.Frame(settings_window)
+        symbols_frame.pack()
+        symbols_label = tk.Label(symbols_frame, text="Player Symbols:")
+        symbols_label.pack()
+        x_symbol_label = tk.Label(symbols_frame, text="Player X symbol:")
+        x_symbol_label.pack()
+        self.x_symbol_entry = tk.Entry(symbols_frame)
+        self.x_symbol_entry.insert(0, self.symbols['X'])
+        self.x_symbol_entry.pack()
+        o_symbol_label = tk.Label(symbols_frame, text="Player O symbol:")
+        o_symbol_label.pack()
+        self.o_symbol_entry = tk.Entry(symbols_frame)
+        self.o_symbol_entry.insert(0, self.symbols['O'])
+        self.o_symbol_entry.pack()
+
+        # Apply button
+        apply_button = tk.Button(settings_window, text="Apply", command=self.apply_settings)
+        apply_button.pack()
+
+    def apply_settings(self):
+        x_symbol = self.x_symbol_entry.get()
+        o_symbol = self.o_symbol_entry.get()
+        self.symbols = {'X': x_symbol, 'O': o_symbol}
+        self.reset_game()
 
 
 root = tk.Tk()
 app = TicTacToeGUI(root)
 root.mainloop()
-# 
