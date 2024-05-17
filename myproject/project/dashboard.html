@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>User Dashboard</title> 
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <nav class="navigation-menu">
+    <ul>
+      <li><a href="#" id="homeButton">Home</a></li>
+      <li><a href="#" id="recentOrdersButton">Recent Orders</a></li>
+      <li><a href="#" id="findBooksButton">Find Books</a></li>
+      <li id="profile" style="float: right;"><a href="#" id="profileButton">Profile</a></li>
+    </ul>
+  </nav>
+  
+  <section class="dashboard">
+    <div id="homeSection" class="home-section">
+      <h2 id="welcomeMessage">Welcome to Your Dashboard</h2>
+      <p>This is your dashboard where you can manage your profile, view recent orders, and explore recommended books.</p>
+    
+      <div class="dashboard-overview">
+        <div class="feature">
+            <h3>About Us</h3>
+            <p>At UNN Bookshop, we are a passionate team of students dedicated to leveraging technology to solve everyday problems. With a keen focus on innovation and collaboration, we strive to create solutions that enhance accessibility and convenience for all our users. Our mission is to harness the power of technology to streamline processes and make educational resources more accessible to students and academic communities worldwide.</p>
+        </div>
+        <div class="feature">
+            <h3>Our Goals</h3>
+            <p>One of the key challenges faced by students at UNN Bookshop has been the long queues and limited accessibility to educational materials. Our primary goal is to address this issue by revolutionizing the way students access and acquire course materials. We aim to create a seamless online platform where students can easily browse through available textbooks, identify the most relevant materials for their courses, and purchase them from the comfort of their homes. By eliminating the need for physical queues and providing a user-friendly interface, we aspire to make the process of obtaining educational resources more efficient and convenient for everyone.</p>
+        </div>
+        <div class="feature">
+            <h3>Our Objectives</h3>
+            <p>To achieve our overarching goal of improving accessibility to educational materials, we have outlined the following objectives:
+              <li>Develop a robust online platform that offers a comprehensive catalog of textbooks and supplementary materials.</li>
+              <li>Implement features such as search filters and recommendation algorithms to help users quickly find relevant materials tailored to their academic needs.</li>
+              <li>Collaborate with academic departments and publishers to ensure the availability of up-to-date and relevant course materials.</li>
+              <li>Provide seamless ordering and delivery services to ensure that students receive their materials in a timely manner, regardless of their location.</li>
+              <li>Continuously innovate and adapt to evolving user needs and technological advancements to enhance the overall user experience.</li></p>
+        </div>
+        <div class="feature">
+            <h3>Our Staff</h3>
+            <p>UNN Bookshop, our team comprises a diverse group of individuals with a shared passion for education and technology. From experienced developers and designers to dedicated customer support representatives, each member of our team plays a crucial role in achieving our mission and goals. With a commitment to excellence and a collaborative spirit, we work tirelessly to deliver innovative solutions that empower students and educators alike. Meet our team and discover the faces behind UNN Bookshop's success!</p>
+        </div>
+    </div>
+    
+      </div>
+    </div>
+
+  <div id="profileSection" class="profile-section">
+    <h2>Profile Information</h2>
+    <form id="profileForm">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" value="John Doe" disabled>
+      <label for="email">Email</label>
+      <input type="email" id="email" value="john@example.com" disabled>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" value="123-456-7890" disabled>
+      <label for="department">Department</label>
+      <input type="text" id="department" value="Statistics" disabled>
+      <label for="address">Delivery Address</label>
+      <textarea id="address" disabled>123 Main St, City, Country</textarea>
+      <button type="button" id="editProfile">Edit Profile</button>
+      <button type="submit" id="saveProfile" style="display: none;">Save Profile</button>
+    </form>
+    <section class="sign-out">
+      <h2>Log out</h2>
+      <button id="logout">Logout</a></button>
+    </section>
+  </div>
+
+    <div id="recentOrdersSection" class="orders-section">
+      <h2>Recent Orders</h2>
+      <ul id="recentOrders">
+        <li>Order #1234 - 5 books - $50 - Delivered</li>
+        <li>Order #5678 - 3 books - $30 - Processing</li>
+      </ul>
+    </div>
+
+    <div id="findBooksSection" class="find-books-section" style="display: none;">
+      <form id="findBooksForm">
+        <h2><strong>Find Books</strong></h2>
+        <section class="search-section">
+          <input type="text" id="searchQuery" placeholder="Enter subject code">
+          <button id="find" type="submit">Search</button>
+        </section>
+      </form>
+      <button id="cart-button" class="fixed-cart"> Cart</button>
+       
+      <div id="cart-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Your Cart</h2>
+          <div id="cart-contents"></div>
+        </div>
+      </div>
+
+      <section class="result-section" style="display: none;">
+        <p><h3>Search Results</h3></p>
+        <div class="result-container"></div>
+      </section>
+          
+      <section class="recommended-books-section">
+        <h3>Recommended Books</h3>
+        <div class="recommended-books-container"></div>
+      </section>
+      <section class="books-section">
+        <h3>All Books</h3>
+        <div class="books-container"></div>
+      </section>
+    </div>
+
+  <div id="message-container" class="message-container"></div>
+  <script src="scripts.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

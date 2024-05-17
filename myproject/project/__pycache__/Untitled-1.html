@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smooth Continuous Loop Slider</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .slider-container {
+    height: 30%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .slider {
+    display: flex;
+    animation: slide 20s linear infinite; /* Adjust the duration (20s in this case) to make it slower */
+    
+  }
+
+  .slide {
+    flex-shrink: 0;
+    width: 100vw; /* Adjust the width of each slide */
+    height: 100vh;
+    transition: transform 0.3s ease;
+  }
+
+  @keyframes slide {
+    0% {
+        transform: translateX(calc(-100vw * 0));
+    
+    }
+    10% {
+      transform: translateX(calc(-100vw * 1));
+    }
+    20% {
+      transform: translateX(calc(-100vw * 2));
+    }
+    30% {
+      transform: translateX(calc(-100vw * 3));
+    }
+    40% {
+      transform: translateX(calc(-100vw * 4));
+    }
+    50% {
+      transform: translateX(calc(-100vw * 5));
+    }
+    60% {
+      transform: translateX(calc(-100vw * 4));
+    }
+    70% {
+      transform: translateX(calc(-100vw * 3));
+    }
+    80% {
+      transform: translateX(calc(-100vw * 2));
+    }
+    90% {
+      transform: translateX(calc(-100vw * 1));
+    }
+    100% {
+      transform: translateX(calc(-100vw * 0));
+    }
+  }
+
+  /* Stop animation on hover */
+  .slider:hover {
+    animation-play-state: paused;
+  }
+
+  /* Extend slide on hover for better visibility */
+  .slide:hover {
+    transform: scale(1.1);
+  }
+</style>
+</head>
+<body>
+
+<div class="slider-container">
+  <div class="slider">
+    <img class="slide" src="e.jpg" alt="Food Image 1">
+    <img class="slide" src="d.jpg" alt="Food Image 2">
+    <img class="slide" src="c.jpg" alt="Food Image 3">
+    <img class="slide" src="b.jpg" alt="Food Image 4">
+    <img class="slide" src="a.jpg" alt="Food Image 5">
+    <img class="slide" src="f.jpg" alt="Food Image 6">
+  </div>
+</div>
+
+</body>
+</html>

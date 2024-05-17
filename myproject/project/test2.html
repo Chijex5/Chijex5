@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>User Dashboard</title> 
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <style>
+    /* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Body styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Light gray background */
+  }
+
+  @media only screen and (max-width: 768px) {
+    .navigation-menu ul li a {
+        font-size: 10px;
+    }
+  }
+
+  .message-container {
+    max-width: 800px; /* Set a maximum width for the container */
+    margin: 20px auto 0; /* Center the container horizontally and set top margin to create space from the top */
+    position: absolute; /* Position the container */
+    top: 0; /* Align the container to the top of the page */
+    left: 50%; /* Center the container horizontally */
+    transform: translateX(-50%); /* Center the container horizontally using transform */
+  }
+
+  .message-box {
+    background-color: #388E3C; /* Dark gray background for success messages */
+    color: #ffffff; 
+    padding: 15px 30px;
+    margin: 20px auto; 
+    border-radius: 10px;
+    width: auto; 
+    text-align: center;
+  }
+
+  /* error message styles */
+  .message-box.error {
+    background-color: #e74c3c; /* Red background for error messages */
+  }
+
+  /* Navigation Menu styles */
+  /* Navigation Menu styles */
+  /* Navigation Menu styles */
+  .navigation-menu {
+    position: fixed; /* Position the navigation menu fixed */
+    top: 0; /* Position it at the top of the viewport */
+    left: 0; /* Align it to the left side */
+    width: 100%; /* Make it span the full width of the viewport */
+    background-color: #388E3C; /* Dark background */
+    padding: 10px;
+    z-index: 1000; /* Ensure it stays on top of other content */
+  }
+
+  .navigation-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navigation-menu ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+
+  .navigation-menu ul li a {
+    color: #fff; /* White text color */
+    text-decoration: none;
+    font-weight: bold;
+    position: relative; /* Add position relative for absolute positioning of pseudo-elements */
+  }
+
+  .navigation-menu ul li a:hover {
+    text-decoration: underline;
+  }
+
+  /* Add custom styles for hover effects */
+  .navigation-menu ul li a::before {
+    content: ''; /* Add pseudo-element for hover effect */
+    position: absolute;
+    bottom: -2px; /* Position the line at the bottom of the link */
+    left: 0;
+    width: 100%; /* Set the width of the line to match the width of the link */
+    height: 2px; /* Set the height of the line */
+    background-color: #fff; /* White color for the line */
+    transform: scaleX(0); /* Initially scale the line to 0 width */
+    transition: transform 0.3s ease; /* Add transition for smooth animation */
+  }
+
+  .navigation-menu ul li a:hover::before {
+    transform: scaleX(1); /* Scale the line to full width on hover */
+  }
+
+  /* Add styles for the active link */
+  .navigation-menu ul li a.active {
+    color: #FFE4E1; /* Change text color for active link */
+  }
+
+
+
+  /* Dashboard styles */
+  .dashboard {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff; /* White background */
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+  }
+
+  .dashboard h2 {
+    margin-bottom: 10px;
+  }
+
+  .dashboard p {
+    margin-bottom: 20px;
+  }
+
+  /* Profile Section styles */
+  .profile-section label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .profile-section input[type="text"],
+  .profile-section input[type="email"],
+  .profile-section input[type="tel"],
+  .profile-section textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .profile-section textarea {
+    height: 80px;
+  }
+
+  .profile-section button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Dark background */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .profile-section button:hover {
+    background-color: #388E3C; /* Darker background on hover */
+  }
+  .sign-out {
+    border-top: 2px solid #ccc;
+    margin-top: 40px;
+  }
+
+
+
+  /* Orders Section styles */
+  .orders-section ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .orders-section ul li {
+    margin-bottom: 10px;
+  }
+
+  /* Find Books Section styles */
+  .find-books-section label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .find-books-section input[type="text"] {
+    width: calc(100% - 80px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .find-books-section button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Dark background */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+  }
+
+  .find-books-section button:hover {
+    background-color: #388E3C; /* Darker background on hover */
+  }
+
+  /* Recommended Books Section styles */
+  .recommended-section ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .recommended-section ul li {
+    margin-bottom: 10px;
+  }
+
+  .fixed-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .fixed-cart:hover {
+    background-color: #388E3C; /* Darker background on hover */
+  }
+
+  /* Style for the search form */
+  #findBooksForm {
+    margin-bottom: 20px; /* Add some space below the form */
+  }
+
+  #searchQuery {
+    width: 300px; /* Set the width of the search input */
+    padding: 8px; /* Add some padding to the input */
+    font-size: 16px; /* Set the font size */
+    margin-top: 40px;
+  }
+
+  #searchQuery::placeholder {
+    color: #999; /* Set the color of the placeholder text */
+  }
+
+  #searchResults {
+    margin-top: 20px; /* Add some space above the search results */
+  }
+
+  /* Style for individual search results */
+  .search-result {
+    margin-bottom: 10px; /* Add some space between search results */
+    padding: 10px; /* Add padding to the search result */
+    border: 1px solid #ccc; /* Add a border around the search result */
+    border-radius: 5px; /* Add border radius to soften edges */
+  }
+
+  /* Style for the title of search results */
+  .search-result-title {
+    font-weight: bold; /* Make the title bold */
+  }
+
+  /* Style for the details of search results */
+  .search-result-details {
+    color: #666; /* Set the color of the details */
+    margin-top: 5px; /* Add some space above the details */
+  }
+
+
+
+  .recommended-books-section {
+    border-bottom: 3px solid #ccc; /* Add a border at the bottom of the recommended books section */
+    padding-bottom: 10px; /* Add some space below the recommended books section */
+    margin-bottom: 50px; /* Add some space between sections */
+  }
+
+  /* Style for all books section */
+  .books-section {
+    border-bottom: 3px solid #ccc; /* Add a border at the bottom of the all books section */
+    padding-bottom: 10px; /* Add some space below the all books section */
+    margin-bottom: 20px; /* Add some space between sections */
+  }
+
+  /* Style for find books section */
+  .search-section {
+    border-bottom: 3px solid #ccc; /* Add a border at the bottom of the find books section */
+    padding-bottom: 10px; /* Add some space below the find books section */
+    margin-bottom: 20px; /* Add some space between sections */
+  }
+
+  .result {
+    border-bottom: 3px solid #ccc; /* Add a border at the bottom of the find books section */
+    padding-bottom: 20px; /* Add some space below the find books section */
+    margin-bottom: 20px; /* Add some space between sections */
+  }
+  .books-container {
+    display: flex; /* Use flexbox to create a flex container */
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+  }
+  .result-container {
+    display: flex; /* Use flexbox to create a flex container */
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+  }
+
+  .book {
+    border: 1px solid #ccc; /* Add a border around each book */
+    border-radius: 5px; /* Add border radius to soften edges */
+    padding: 10px; /* Add padding to the book */
+    margin-bottom: 10px; /* Add some space between each book */
+    width: calc(45% - 10px); /* Set the width of each book to 50% minus margin */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+  }
+
+  .recommended-books-container {
+    display: flex; /* Use flexbox to create a flex container */
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+  }
+
+
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    border-radius: 10px
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+  </style>
+
+</head>
+<body>
+  <!-- Navigation Menu -->
+  <nav class="navigation-menu">
+    <ul>
+      <li><a href="#" id="homeButton">Home</a></li>
+      <li><a href="#" id="recentOrdersButton">Recent Orders</a></li>
+      <li><a href="#" id="findBooksButton">Find Books</a></li>
+      <li id="profile" style="float: right;"><a href="#" id="profileButton">Profile</a></li>
+    </ul>
+  </nav>
+  
+
+  <!-- Dashboard Content -->
+  <section class="dashboard">
+    <div id="homeSection" class="home-section">
+      <h2 id="welcomeMessage">Welcome to Your Dashboard</h2>
+      <p>This is your dashboard where you can manage your profile, view recent orders, and explore recommended books.</p>
+    
+      <!-- Dashboard Overview -->
+      <div class="dashboard-overview">
+        <div class="feature">
+            <h3>About Us</h3>
+            <p>At UNN Bookshop, we are a passionate team of students dedicated to leveraging technology to solve everyday problems. With a keen focus on innovation and collaboration, we strive to create solutions that enhance accessibility and convenience for all our users. Our mission is to harness the power of technology to streamline processes and make educational resources more accessible to students and academic communities worldwide.</p>
+        </div>
+        <div class="feature">
+            <h3>Our Goals</h3>
+            <p>One of the key challenges faced by students at UNN Bookshop has been the long queues and limited accessibility to educational materials. Our primary goal is to address this issue by revolutionizing the way students access and acquire course materials. We aim to create a seamless online platform where students can easily browse through available textbooks, identify the most relevant materials for their courses, and purchase them from the comfort of their homes. By eliminating the need for physical queues and providing a user-friendly interface, we aspire to make the process of obtaining educational resources more efficient and convenient for everyone.</p>
+        </div>
+        <div class="feature">
+            <h3>Our Objectives</h3>
+            <p>To achieve our overarching goal of improving accessibility to educational materials, we have outlined the following objectives:
+
+              <li>Develop a robust online platform that offers a comprehensive catalog of textbooks and supplementary materials.</li>
+              <li>Implement features such as search filters and recommendation algorithms to help users quickly find relevant materials tailored to their academic needs.</li>
+              <li>Collaborate with academic departments and publishers to ensure the availability of up-to-date and relevant course materials.</li>
+              <li>Provide seamless ordering and delivery services to ensure that students receive their materials in a timely manner, regardless of their location.</li>
+              <li>Continuously innovate and adapt to evolving user needs and technological advancements to enhance the overall user experience.</li></p>
+        </div>
+        <div class="feature">
+            <h3>Our Staff</h3>
+            <p>UNN Bookshop, our team comprises a diverse group of individuals with a shared passion for education and technology. From experienced developers and designers to dedicated customer support representatives, each member of our team plays a crucial role in achieving our mission and goals. With a commitment to excellence and a collaborative spirit, we work tirelessly to deliver innovative solutions that empower students and educators alike. Meet our team and discover the faces behind UNN Bookshop's success!</p>
+        </div>
+    </div>
+    
+      </div>
+    </div>
+    
+
+  <!-- Profile Section -->
+  <div id="profileSection" class="profile-section">
+    <h2>Profile Information</h2>
+    <form id="profileForm">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" value="John Doe" disabled>
+      <label for="email">Email</label>
+      <input type="email" id="email" value="john@example.com" disabled>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" value="123-456-7890" disabled>
+      <label for="department">Department</label>
+      <input type="text" id="department" value="Statistics" disabled>
+      <label for="address">Delivery Address</label>
+      <textarea id="address" disabled>123 Main St, City, Country</textarea>
+      <button type="button" id="editProfile">Edit Profile</button>
+      <button type="submit" id="saveProfile" style="display: none;">Save Profile</button>
+    </form>
+    <section class="sign-out">
+      <h2>Log out</h2>
+      <button id="logout">Logout</a></button>
+    </section>
+  </div>
+
+    <!-- Recent Orders Section -->
+    <div id="recentOrdersSection" class="orders-section">
+      <h2>Recent Orders</h2>
+      <ul id="recentOrders">
+        <!-- Orders will be dynamically populated here -->
+        <li>Order #1234 - 5 books - $50 - Delivered</li>
+        <li>Order #5678 - 3 books - $30 - Processing</li>
+      </ul>
+    </div>
+
+    <!-- Find Books Section -->
+    
+    <div id="findBooksSection" class="find-books-section" style="display: none;">
+      <form id="findBooksForm">
+        <h2><strong>Find Books</strong></h2>
+        <section class="search-section">
+          <input type="text" id="searchQuery" placeholder="Enter subject code">
+          <button id="find" type="submit">Search</button>
+        </section>
+        <section class="result" style="display: none;">
+          <p><h3>Search Results</h3></p>
+        <div class="result-container"></div>
+        </section>
+      </form>
+      <button id="cart-button" class="fixed-cart"> Cart</button>
+       
+      <div id="cart-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Your Cart</h2>
+          <div id="cart-contents"></div>
+        </div>
+      </div>
+          
+      <section class="recommended-books-section">
+        <h3>Recommended Books</h3>
+        <div class="recommended-books-container"></div>
+      </section>
+      <section class="books-section">
+        <h3>All Books</h3>
+        <div class="books-container"></div>
+      </section>
+    </div>
+
+    
+    
+  <!-- Add a container for the message boxes -->
+  <div id="message-container" class="message-container"></div>
+  <script src="scripts.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Function to show or hide the cart button based on section
+      
+      // Event listener for section changes
+
+      // Profile section logic
+      function showMessage(message, type) {
+          const messageBox = document.createElement("div");
+          messageBox.textContent = message;
+          messageBox.className = "message-box";
+          if (type === "error") {
+            messageBox.classList.add("error");
+          }
+          const container = document.getElementById("message-container");
+          container.appendChild(messageBox);
+          // Show the message box immediately
+          messageBox.style.display = "block";
+          setTimeout(function() {
+            // Hide the message box after 3 seconds
+            messageBox.style.display = "none";
+          }, 3000);
+      }
+
+      const editProfileBtn = document.getElementById("editProfile");
+      const saveProfileBtn = document.getElementById("saveProfile");
+      const profileInputs = document.querySelectorAll("#profileForm input, #profileForm textarea");
+
+      function enableProfileEditing() {
+          profileInputs.forEach(input => {
+              input.removeAttribute("disabled");
+          });
+          saveProfileBtn.style.display = "block";
+          editProfileBtn.style.display = "none";
+      }
+
+      function saveProfile() {
+          profileInputs.forEach(input => {
+              input.setAttribute("disabled", "true");
+          });
+          saveProfileBtn.style.display = "none";
+          editProfileBtn.style.display = "block";
+
+          showMessage("Profile information saved successfully!", "success");
+      }
+
+      editProfileBtn.addEventListener("click", enableProfileEditing);
+      saveProfileBtn.addEventListener("click", saveProfile);
+
+      // Get the user's name from the profile section
+      const userNameElement = document.getElementById("fullName");
+      const userName = userNameElement.value; // Assuming the user's name is stored in an input field with the id "fullName"
+        
+      // Update the welcome message with the user's name
+      const welcomeMessageElement = document.getElementById("welcomeMessage");
+      welcomeMessageElement.textContent = `Welcome back, ${userName}! Ready to explore?`;
+
+      // Navigation logic
+      const homeButton = document.getElementById("homeButton");
+      const profileButton = document.getElementById("profileButton");
+      const recentOrdersButton = document.getElementById("recentOrdersButton");
+      const findBooksButton = document.getElementById("findBooksButton");
+
+      const homeSection = document.getElementById("homeSection");
+      const profileSection = document.getElementById("profileSection");
+      const recentOrdersSection = document.getElementById("recentOrdersSection");
+      const findBooksSection = document.getElementById("findBooksSection");
+
+      
+
+      function showHomeSection() {
+          homeSection.style.display = "block";
+          profileSection.style.display = "none";
+          recentOrdersSection.style.display = "none";
+          findBooksSection.style.display = "none";
+          setActiveLink(homeButton); // Set active link
+      }
+
+      function showProfileSection() {
+          homeSection.style.display = "none";
+          profileSection.style.display = "block";
+          recentOrdersSection.style.display = "none";
+          findBooksSection.style.display = "none";
+          setActiveLink(profileButton); // Set active link
+      }
+
+      function showRecentOrdersSection() {
+          homeSection.style.display = "none";
+          profileSection.style.display = "none";
+          recentOrdersSection.style.display = "block";
+          findBooksSection.style.display = "none";
+          setActiveLink(recentOrdersButton); // Set active link
+      }
+
+      function showFindBooksSection() {
+          homeSection.style.display = "none";
+          profileSection.style.display = "none";
+          recentOrdersSection.style.display = "none";
+          findBooksSection.style.display = "block";
+          setActiveLink(findBooksButton); // Set active link
+      }
+
+      function setActiveLink(link) {
+          const navigationLinks = document.querySelectorAll(".navigation-menu ul li a");
+          navigationLinks.forEach(link => {
+              link.classList.remove("active");
+          });
+          link.classList.add("active");
+      }
+
+      homeButton.addEventListener("click", showHomeSection);
+      profileButton.addEventListener("click", showProfileSection);
+      recentOrdersButton.addEventListener("click", showRecentOrdersSection);
+      findBooksButton.addEventListener("click", showFindBooksSection);
+
+      // Initially show the home section
+      showHomeSection();
+
+      // Find Books form logic
+
+      // Logout button logic
+      const logoutButton = document.getElementById("logout");
+
+      logoutButton.addEventListener("click", function(event) {
+          event.preventDefault(); // Prevent default anchor behavior
+
+          // Perform logout action, such as clearing session or local storage
+          // For example:
+          localStorage.removeItem("userToken"); // Assuming you're using localStorage for authentication
+
+          // Redirect the user to the login page
+          window.location.href = "bookshop.html";
+      });
+  });
+
+  </script>
+  <script>
+    const books = [
+      { code: 'STA112', title: 'Probability II', department: 'Statistics', price: 2000, available: true },
+      { code: 'STA111', title: 'Introduction to Probability', department: 'Statistics', price: 2500, available: true },
+      { code: 'STA132', title: 'Inference II', department: 'Statistics', price: 3000, available: false },
+      { code: 'STA131', title: 'Introduction to Inference', department: 'Statistics', price: 2200, available: true },
+      { code: 'STA172', title: 'Statistical Computing', department: 'Statistics', price: 2800, available: true },
+      { code: 'MTH122', title: 'Circle Geometry', department: 'Mathematics', price: 1800, available: true },
+      { code: 'MTH111', title: 'Integrated Mathematics', department: 'Mathematics', price: 1500, available: false },
+      { code: 'MTH131', title: 'Integration and Depreciation', department: 'Mathematics', price: 2000, available: true },
+      { code: 'BIO151', title: 'Introduction to Biology', department: 'Micro Biology', price: 3000, available: true },
+      { code: 'CHM122', title: 'Organic Chemistry II', department: 'Pure and Industrial Chemistry', price: 3500, available: true },
+      { code: 'CHM132', title: 'Inorganic Chemistry II', department: 'Pure and Industrial Chemistry', price: 4000, available: false },
+      { code: 'CHM121', title: 'Introduction to Organic Chemistry', department: 'Pure and Industrial Chemistry', price: 3200, available: true },
+      { code: 'CHM101', title: 'Introduction to Inorganic Chemistry', department: 'Pure and Industrial Chemistry', price: 2800, available: true },
+      { code: 'ENG101', title: 'Introduction to Engineering', department: 'Engineering', price: 2500, available: true },
+      { code: 'GSP102', title: 'Lexis and Structure', department: 'General Studies', price: 1500, available: true },
+      { code: 'GSP111', title: 'Use of Library', department: 'General Studies', price: 1000, available: false },
+      { code: 'GSP101', title: 'Use of English', department: 'General Studies', price: 1200, available: true },
+      { code: 'ENG102', title: 'Introduction to Engineering II', department: 'Engineering', price: 3000, available: true },
+      { code: 'GLG142', title: 'Earth History', department: 'Geology', price: 2000, available: true },
+      { code: 'COS101', title: 'Introduction to Computer Sciences', department: 'Computer Sciences', price: 2500, available: true }
+  ];
+
+  const cart = {};
+
+  function showMessage(message, type) {
+      const messageBox = document.createElement("div");
+      messageBox.textContent = message;
+      messageBox.className = "message-box";
+      if (type === "error") {
+        messageBox.classList.add("error");
+      }
+      const container = document.getElementById("message-container");
+      container.appendChild(messageBox);
+      // Show the message box immediately
+      messageBox.style.display = "block";
+      setTimeout(function() {
+        // Hide the message box after 3 seconds
+        messageBox.style.display = "none";
+      }, 3000);
+  }
+
+  // Function to display cart contents
+  function displayCartContents() {
+      const cartContentsDiv = document.getElementById('cart-contents');
+      cartContentsDiv.innerHTML = ''; // Clear previous content
+    
+      let totalPrice = 0; // Initialize total price
+
+      const nonZeroCart = {}; // Create a new object to store non-zero cart items
+
+      // Filter out books with a quantity of zero
+      for (const [bookCode, amount] of Object.entries(cart)) {
+          if (amount > 0) {
+              nonZeroCart[bookCode] = amount;
+          }
+      }
+
+      if (Object.keys(nonZeroCart).length === 0) {
+          cartContentsDiv.innerHTML = "<p>Your Cart is Empty</p>";
+      } else {
+          for (const [bookCode, amount] of Object.entries(nonZeroCart)) {
+              const book = books.find(book => book.code === bookCode);
+              if (book) {
+                  const cartItem = document.createElement('div');
+                  cartItem.classList.add('cart-item');
+                  const itemPrice = book.price * amount; // Calculate item price
+                  totalPrice += itemPrice; // Add item price to total
+                  cartItem.innerHTML = `
+                      <li>${book.code}, Price: ₦${book.price}, ${book.available ? 'Available' : 'Not Available'}, Quantity: ${amount}
+                      <p><span> &nbsp; &nbsp; &nbsp;Item Total: ₦${itemPrice}</span></p></li>
+                  `;
+                  cartContentsDiv.appendChild(cartItem);
+              }
+          }
+
+          const totalPriceElement = document.createElement('p');
+          totalPriceElement.textContent = `Total Price: ₦${totalPrice}`;
+          cartContentsDiv.appendChild(totalPriceElement);
+
+          // Add event listeners to remove buttons
+      }
+      // Show the cart modal
+      const cartModal = document.getElementById('cart-modal');
+      cartModal.style.display = 'block';
+
+      const closeButton = document.querySelector('.close');
+
+      // Add event listener to close the modal when the close button is clicked
+      closeButton.addEventListener('click', () => {
+          const cartModal = document.getElementById('cart-modal');
+          cartModal.style.display = 'none';
+      });
+  }
+
+
+
+    
+
+  // Function to update cart button text
+  function updateCartButton() {
+      let totalItems = 0;
+      for (const amount of Object.values(cart)) {
+          totalItems += amount;
+      }
+      // Update cart button text and icon
+      cartButton.innerHTML = `<i class="fas fa-shopping-cart"></i> Cart ${totalItems}`;
+  }
+
+  // Initialize cart button
+  const cartButton = document.getElementById('cart-button');
+  updateCartButton();
+
+  // Event listener for cart button click
+  cartButton.addEventListener('click', () => {
+      displayCartContents();
+  });
+
+  // Function to add event listeners for add to cart buttons
+  function attachAddToCartEventListeners(booksContainer) {
+      const addToCartButtons = booksContainer.querySelectorAll('.add-to-cart-btn');
+      addToCartButtons.forEach(button => {
+          const bookCode = button.dataset.code;
+          const quantityContainer = button.parentNode.querySelector('.quantity-container');
+          const decrementBtn = quantityContainer.querySelector('.decrement-btn');
+          const incrementBtn = quantityContainer.querySelector('.increment-btn');
+          const quantityDisplay = quantityContainer.querySelector('.quantity-display');
+
+          quantityContainer.style.display = 'none'; // Hide quantity container initially
+
+          // Initialize quantity for the book
+          if (!cart[bookCode]) {
+              cart[bookCode] = 0;
+              quantityDisplay.textContent = cart[bookCode];
+          } else {
+              quantityDisplay.textContent = cart[bookCode];
+          }
+
+          button.addEventListener('click', () => {
+              // Toggle visibility of quantity container
+              quantityContainer.style.display = quantityContainer.style.display === 'none' ? 'block' : 'none';
+          });
+
+          decrementBtn.addEventListener('click', () => {
+              if (cart[bookCode] > 0) {
+                  cart[bookCode]--;
+                  quantityDisplay.textContent = cart[bookCode];
+                  updateCartButton();
+              }
+          });
+
+          incrementBtn.addEventListener('click', () => {
+              cart[bookCode]++;
+              quantityDisplay.textContent = cart[bookCode];
+              updateCartButton();
+          });
+      });
+  }
+
+
+  // Function to display all books in the store
+  function displayAllBooks() {
+      const booksContainer = document.querySelector('.books-container');
+      booksContainer.innerHTML = ''; // Clear previous content
+
+      books.forEach(book => {
+          const bookDiv = document.createElement('div');
+          bookDiv.classList.add('book');
+          const availabilityColor = book.available ? 'green' : 'red';
+          bookDiv.innerHTML = `
+              <h4>${book.code} - ${book.title}</h4>
+              Price: ₦${book.price}
+              <p style="color: ${availabilityColor};">${book.available ? 'Available' : 'Not Available'}</p>
+              <div class="quantity-container">
+                  <button class="decrement-btn">-</button>
+                  <span class="quantity-display">0</span>
+                  <button class="increment-btn">+</button>
+              </div>
+              <button class="add-to-cart-btn" data-code="${book.code}">Add to Cart</button>
+          `;
+          booksContainer.appendChild(bookDiv);
+      });
+      attachAddToCartEventListeners(booksContainer);
+  }
+
+  // Function to display recommended books based on the user's department
+  function displayRecommendedBooks() {
+      const departmentElement = document.getElementById("department");
+      const department = departmentElement.value;
+      const recommendedBooks = books.filter(book => book.department === department);
+      const recommendedBooksContainer = document.querySelector('.recommended-books-container');
+      recommendedBooksContainer.innerHTML = ''; // Clear previous content
+
+      recommendedBooks.forEach(book => {
+          const bookDiv = document.createElement('div');
+          bookDiv.classList.add('book');
+          // Determine the color based on availability status
+          const availabilityColor = book.available ? 'green' : 'red';
+          bookDiv.innerHTML = `
+              <h4>${book.code} - ${book.title}</h4>
+              Price: ₦${book.price}
+              <p style="color: ${availabilityColor};">${book.available ? 'Available' : 'Not Available'}</p>
+              <div class="quantity-container">
+                  <button class="decrement-btn">-</button>
+                  <span class="quantity-display">0</span>
+                  <button class="increment-btn">+</button>
+              </div>
+              <button class="add-to-cart-btn" data-code="${book.code}">Add to Cart</button>
+          `;
+          recommendedBooksContainer.appendChild(bookDiv);
+      });
+      attachAddToCartEventListeners(recommendedBooksContainer);
+  }
+
+
+      
+
+  findBooksForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const searchQueryInput = document.getElementById("searchQuery");
+      const searchQuery = searchQueryInput.value.trim();
+      if (searchQuery === '') {
+          showMessage("Please enter a subject code", "error");
+          return;
+      }
+      // Perform book search based on searchQuery
+      const searchResults = searchBooks(searchQuery);
+      // Display search results
+      displaySearchResults(searchResults);
+      
+  });
+
+  function searchBooks(query) {
+      // Perform search logic here, for example, searching through the books array
+      const results = books.filter(book => book.code.toLowerCase().includes(query.toLowerCase()));
+      return results;
+  }
+
+  function displaySearchResults(results) {
+      const resulte = document.querySelector('.result')
+      const searchResultsDiv = document.querySelector(".result-container");
+      resulte.style.display = 'block'
+      if (results.length === 0) {
+          searchResultsDiv.innerHTML = "<p>No results found.</p>";
+      } else {
+          const resultContainer = document.querySelector('.result-container');
+          resultContainer.innerHTML = ''; 
+          results.forEach(book => {
+              const bookDiv = document.createElement('div');
+              bookDiv.classList.add('book');
+              const availabilityColor = book.available ? 'green' : 'red';
+              bookDiv.innerHTML = `
+                  <h4>${book.code} - ${book.title}</h4>
+                  Price: ₦${book.price}
+                  <p style="color: ${availabilityColor};">${book.available ? 'Available' : 'Not Available'}</p>
+                  <div class="quantity-container">
+                      <button class="decrement-btn">-</button>
+                      <span class="quantity-display">0</span>
+                      <button class="increment-btn">+</button>
+                  </div>
+                  <button class="add-to-cart-btn" data-code="${book.code}">Add to Cart</button>
+              `;
+              resultContainer.appendChild(bookDiv);
+          });
+          attachAddToCartEventListeners(resultContainer); // Attach event listeners to add items to cart
+      }
+  }    
+
+
+  // Display all books initially
+  displayAllBooks();
+
+  // Display recommended books based on the user's department
+  displayRecommendedBooks();
+
+  </script>
+</body>
+</html>
