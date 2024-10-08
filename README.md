@@ -1,6 +1,6 @@
 - 👋 Hi, I am Chijioke
 - I Live in Lagos
-- 👀 I am a data analyst/Data engineer
+- 👀 I am a Data engineer
 - 
 
 <!---
