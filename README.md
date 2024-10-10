@@ -10,9 +10,7 @@ Focused on delivering scalable data solutions, I specialize in building robust d
 - 🔭 I’m currently working on: Student Performance Tracking System
 - 🌱 I’m currently learning: PostgreSQL
 - 👯 I’m looking to collaborate on: Open-source projects
-- 📫 How to reach me: embroconnect3@gmail.com
-  
-  **Prefer not to use email?** Feel free to reach out on [LinkedIn](https://LinkedIn.com/in/chijioke-uzodinma-34389b267/) instead!
+- 📫 How to reach me: embroconnect3@gmail.com  **Prefer not to use email?** Feel free to reach out on [LinkedIn](https://LinkedIn.com/in/chijioke-uzodinma-34389b267/) instead!
 
 ## Expertise
 
