@@ -32,7 +32,7 @@ Focused on delivering scalable data solutions, I specialize in building robust d
 #### 1. Student Performance Tracking System
 Description: The Student Performance Tracking System is designed to monitor student academic progress, automatically identify students who may be struggling, and enable early intervention through peer mentorship and notifications to guardians.
 Tech Stack: Python, MySQL, Snowflakes
-Link: https://github.com/Chijex5/skillphore_datathon
+Link: https://github.com/Chijex5/skillphore_datathon.git
 
 #### 2. Reddit Data Scrapper
 Description: The Reddit Data Fetching and Storage System is designed to retrieve top posts from specified subreddits using the PRAW library. This system efficiently organizes the data into a Pandas DataFrame and facilitates the export of top-rated posts to a CSV file. Furthermore, it establishes a secure connection to a Snowflake database to store the top-rated posts, utilizing environment variables for sensitive information, such as API keys and database credentials. This approach ensures secure and efficient handling of data while maintaining data integrity.
