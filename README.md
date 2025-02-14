@@ -28,20 +28,21 @@
 
 ## 🚀 Featured Projects
 
-### **D'Footprint** - Custom Footwear Platform  
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-green)](https://dfootprint.vercel.app)
-[![GitHub](https://img.shields.io/badge/Source-Code-black)](https://github.com/yourusername/dfootprint)  
+### **Semaine** - Personal Security Items
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-green)]((https://semaine-website-beta.vercel.app/))
+[![GitHub](https://img.shields.io/badge/Source-Code-black)](https://github.com/Chijex5/semaine-website/))  
 Next.js | Flask | PostgreSQL | JWT Auth  
 ✔️ Admin dashboard with real-time order tracking  
 ✔️ Custom design submission system  
 ✔️ Reduced processing time by 40%  
 
-### **UniBooks** - Campus Book Marketplace  
-[![GitHub](https://img.shields.io/badge/Source-Code-black)](https://github.com/yourusername/unibooks)  
+### **Students Study Calendar** - Make your own calendar and never miss a study schedule
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-green)]((https://students-study-calendar.vercel.app/))
+[![GitHub](https://img.shields.io/badge/Source-Code-black)]((https://github.com/Chijex5/Student-Study-Calendar))  
 React | Firebase | Context API  
-✔️ Role-based access control  
-✔️ Wishlist synchronization  
-✔️ Served 200+ active users  
+✔️ Generates timetable  
+✔️ View Real-Time Reports  
+✔️ Control  Your Data 
 
 ## 🏆 Achievements
 
