@@ -1,7 +1,7 @@
 # Chijioke Uzodinma 🚀  
 **Full-Stack Developer | AI Enthusiast | Data Alchemist**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://linkedin.com/in/chijioke-uzodinma)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/chijioke-uzodinma-34389b267/)
 [![Email](https://img.shields.io/badge/Email-Contact%20Me-red?style=flat&logo=gmail)](mailto:embroconnect3@gmail.com)
 [![Portfolio](https://img.shields.io/badge/Portfolio-Visit%20Site-black?style=flat&logo=vercel)](https://interactive-ai-enhanced-portfolio-spnu.vercel.app/)
 
@@ -64,7 +64,7 @@ _University of Nigeria Nsukka_ • 2023-Present
 ## 📫 Let's Connect!
 
 - 📧 **Email**: [embroconnect3@gmail.com](mailto:embroconnect3@gmail.com)
-- 💼 **LinkedIn**: [Chijioke Uzodinma](https://linkedin.com/in/chijioke-uzodinma)
+- 💼 **LinkedIn**: [Chijioke Uzodinma](https://www.linkedin.com/in/chijioke-uzodinma-34389b267/)
 - 🐦 **Twitter**: [@chijex5](https://twitter.com/chijex5)
 
 ![Visitor Count](https://komarev.com/ghpvc/?username=chijex5&color=2DD4BF&style=flat-square)
