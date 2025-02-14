@@ -67,4 +67,4 @@ _University of Nigeria Nsukka_ • 2023-Present
 - 💼 **LinkedIn**: [Chijioke Uzodinma](https://linkedin.com/in/chijioke-uzodinma)
 - 🐦 **Twitter**: [@chijex5](https://twitter.com/chijex5)
 
-![Visitor Count](https://komarev.com/ghpvc/?username=yourusername&color=2DD4BF&style=flat-square)
+![Visitor Count](https://komarev.com/ghpvc/?username=chijex5&color=2DD4BF&style=flat-square)
