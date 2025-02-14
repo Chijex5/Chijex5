@@ -63,6 +63,6 @@ _University of Nigeria Nsukka_ • 2023-Present
 
 - 📧 **Email**: [embroconnect3@gmail.com](mailto:embroconnect3@gmail.com)
 - 💼 **LinkedIn**: [Chijioke Uzodinma](https://linkedin.com/in/chijioke-uzodinma)
-- 🐦 **Twitter**: [@yourhandle](https://twitter.com/chijex5)
+- 🐦 **Twitter**: [@chijex5](https://twitter.com/chijex5)
 
 ![Visitor Count](https://komarev.com/ghpvc/?username=yourusername&color=2DD4BF&style=flat-square)
