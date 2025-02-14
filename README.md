@@ -38,7 +38,7 @@ Next.js | Flask | PostgreSQL | JWT Auth
 ✔️ Reduced processing time by 40%  
 
 ### **Students Study Calendar** - Make your own calendar and never miss a study schedule
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-green)](https://students-study-calendar.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-green)](https://student-study-calendar.vercel.app/)
 [![GitHub](https://img.shields.io/badge/Source-Code-black)](https://github.com/Chijex5/Student-Study-Calendar)
 React | Firebase | Context API  
 ✔️ Generates timetable  
