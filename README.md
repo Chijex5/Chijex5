@@ -3,7 +3,7 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/chijioke-uzodinma-34389b267/)
 [![Email](https://img.shields.io/badge/Email-Contact%20Me-red?style=flat&logo=gmail)](mailto:embroconnect3@gmail.com)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit%20Site-black?style=flat&logo=vercel)](https://interactive-ai-enhanced-portfolio-spnu.vercel.app/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit%20Site-black?style=flat&logo=vercel)](https://my-portfolio3-ruddy.vercel.app/)
 
 <div align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=2DD4BF&center=true&vCenter=true&width=435&lines=Turning+Complexity+Into+Elegance;Full-Stack+Problem+Solver;Data-Driven+Developer" alt="Typing SVG" />
