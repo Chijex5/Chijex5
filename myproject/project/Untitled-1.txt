@@ -1,3 +1,0 @@
-<div id="text1" class="text-container">Text Set 1</div>
-<div id="text2" class="text-container">Text Set 2</div>
-<div id="text3" class="text-container">Text Set 3</div>
