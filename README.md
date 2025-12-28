@@ -35,10 +35,15 @@
 Next.js | TypeScript | Tailwind CSS | PostgreSQL | TipTap | Resend
 
 ✔️ Full-featured blogging platform with modern App Router architecture
+
 ✔️ Secure admin dashboard with role-based access control
+
 ✔️ Rich text editor powered by TipTap
+
 ✔️ Markdown + static generation for blazing-fast performance
+
 ✔️ Email subscriptions & notifications via Resend
+
 ✔️ responsive design, and production-ready UX
 
 ### **Students Study Calendar** - Make your own calendar and never miss a study schedule
@@ -46,7 +51,9 @@ Next.js | TypeScript | Tailwind CSS | PostgreSQL | TipTap | Resend
 [![GitHub](https://img.shields.io/badge/Source-Code-black)](https://github.com/Chijex5/Student-Study-Calendar)
 React | Firebase | Context API  
 ✔️ Generates timetable  
+
 ✔️ View Real-Time Reports  
+
 ✔️ Control  Your Data 
 
 ## 🏆 Achievements
