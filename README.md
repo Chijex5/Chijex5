@@ -28,14 +28,18 @@
 
 ## 🚀 Featured Projects
 
-### **Semaine** - Personal Security Items
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-green)](https://semaine-website-beta.vercel.app/)
-[![GitHub](https://img.shields.io/badge/Source-Code-black)](https://github.com/Chijex5/semaine-website/)
+### **Personal Blog** — chijioke.app
+[![Live Blog](https://img.shields.io/badge/Live-Blog-green)](https://www.chijioke.app)
+[![GitHub](https://img.shields.io/badge/Source-Code-black)](https://github.com/Chijex5/Blog)
 
-Next.js | Flask | PostgreSQL | JWT Auth  
-✔️ Admin dashboard with real-time order tracking  
-✔️ Custom design submission system  
-✔️ Reduced processing time by 40%  
+Next.js | TypeScript | Tailwind CSS | PostgreSQL | TipTap | Resend
+
+✔️ Full-featured blogging platform with modern App Router architecture
+✔️ Secure admin dashboard with role-based access control
+✔️ Rich text editor powered by TipTap
+✔️ Markdown + static generation for blazing-fast performance
+✔️ Email subscriptions & notifications via Resend
+✔️ responsive design, and production-ready UX
 
 ### **Students Study Calendar** - Make your own calendar and never miss a study schedule
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-green)](https://student-study-calendar.vercel.app/)
